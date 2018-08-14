@@ -1,0 +1,43 @@
+---
+title: "R - dane ze strony internetowej"
+author: "Piotr Maœlej"
+date: "9 sierpnia 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Strona internetowa
+Z czego sk³ada siê strona internetowa:
+
+```{r, include=FALSE}
+# All defaults
+# knitr::include_graphics("01-zawartosc-strony-internetowej.jpg")
+```
+
+![http://pasja-informatyki.pl/programowanie-webowe/frontend-html-css-javascript/](01-zawartosc-strony-internetowej.jpg)
+
+# rvest
+
+```{r message=FALSE}
+library(rvest)
+```
+
+```{r}
+url <- "https://pl.wikipedia.org/wiki/Lista_bank%C3%B3w_dzia%C5%82aj%C4%85cych_w_Polsce"
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+# RSelenium 
