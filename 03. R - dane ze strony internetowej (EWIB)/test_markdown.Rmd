@@ -1,8 +1,10 @@
 ---
-title: "R - dane ze strony internetowej"
-author: "Piotr Maœlej"
-date: "9 sierpnia 2018"
+title:    "R - dane ze strony internetowej"
+author:   "Piotr Maœlej"
+date:     "24 sierpnia 2018"
 output: html_document
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -12,12 +14,47 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Strona internetowa
 Z czego sk³ada siê strona internetowa:
 
-```{r, include=FALSE}
+<!-- ```{r, include=FALSE}
 # All defaults
-# knitr::include_graphics("01-zawartosc-strony-internetowej.jpg")
-```
+# knitr::include_graphics("01b-zawartosc-strony-internetowej.jpg")
+```/-->
 
-![http://pasja-informatyki.pl/programowanie-webowe/frontend-html-css-javascript/](01-zawartosc-strony-internetowej.jpg)
+![http://pasja-informatyki.pl/programowanie-webowe/frontend-html-css-javascript/](01b-zawartosc-strony-internetowej.jpg)
+
+# html
+```{html}
+DODAÆ NAJPROSTSZ¥ STRONÊ INTERNETOW¥
+
+<!DOCTYPE html>
+<html>
+  
+  <head>
+
+  </head>
+  
+  <body>
+  
+  </body>
+  
+</html>
+```
+  html     Zawiera informacje o stronie które nie s¹ jej treœci¹
+  body
+  div
+  table
+  td / th / tr
+  h1...6
+  ol / ul / li
+  a
+  
+  https://webdesignfromscratch.com/html-css/html-tags/
+  
+  
+  kilka znaczników na jednej stronie
+  jak dzia³a otwarcie, zamkniêcie
+  k
+  
+# css
 
 # rvest
 
@@ -27,13 +64,71 @@ library(rvest)
 
 ```{r}
 url <- "https://pl.wikipedia.org/wiki/Lista_bank%C3%B3w_dzia%C5%82aj%C4%85cych_w_Polsce"
+webpage <- read_html(url)
+webpage
 ```
+
+```{r}
+records <- webpage %>% 
+  html_nodes("table")
+records
+```
+
+```{r}
+records <- webpage %>% 
+  html_nodes("table") %>%
+  .[[1]] %>%
+  html_nodes("td") %>% 
+  head(10)
+
+records
+```
+
+```{r}
+records <- webpage %>% 
+  html_nodes("table") %>%
+  .[[1]] %>%
+  html_nodes("td") %>%
+  html_text() %>% 
+  head(10)
+
+records
+```
+
+```{r}
+records <- webpage %>% 
+  html_nodes("table") %>%
+  .[[1]] %>%
+  html_nodes("th, td") %>%
+  html_text() %>%
+  gsub('[\r\n\t]', '', .) %>% 
+  head(10)
+
+records
+```
+
+```{r results = 'asis'}
+wynik_df <- records %>%
+  tail(-13) %>% 
+  matrix(ncol = 13, byrow = TRUE)%>% 
+  data.frame()
+  
+colnames(wynik_df) <- head(records, 13)
+
+head(wynik_df)
+```
+
+```{r echo = FALSE, results = 'asis', error = FALSE}
+knitr::kable(wynik_df, format = "markdown")
+```
+
+
 
 ## Including Plots
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
+```{r pressure, echo = FALSE}
 plot(pressure)
 ```
 

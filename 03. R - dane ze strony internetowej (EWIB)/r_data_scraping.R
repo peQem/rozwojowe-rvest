@@ -21,7 +21,7 @@ webpage
 records <- webpage %>% 
   html_nodes("table") %>%
   .[[1]] %>%
-  html_nodes("td") %>%
+  html_nodes("th, td") %>%
   html_text() %>%
   gsub('[\r\n\t]', '', .)
 
@@ -36,7 +36,13 @@ records = head(records, -3)
 mx_rec = matrix(records, ncol = 13, byrow = TRUE)
 
 #wynik_frame <- data.frame(mx_rec)
-#colnames(wynik_frame) <- c("Puste", "Dzien", "Godziny", "Rodzaj", "Poziom", "Instruktor", "Ulica")
+wynik_df <- records %>%
+  tail(-13) %>% 
+  matrix(ncol = 13, byrow = TRUE) %>% 
+  data.frame
+
+colnames(wynik_df) <- head(records, 13)
+
 
 
 # CZY DA SIÊ KRÓCEJ, LEPIEJ, DOK£ADNIEJ ?? --> DA SIÊ :)
