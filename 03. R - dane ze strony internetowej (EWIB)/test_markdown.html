@@ -293,6 +293,164 @@ head(wynik_df)</code></pre>
 <tbody>
 </tbody>
 </table>
+<p>W tym przypadku da się prościej</p>
+<pre class="r"><code>url &lt;- &quot;https://pl.wikipedia.org/wiki/Lista_bank%C3%B3w_dzia%C5%82aj%C4%85cych_w_Polsce&quot;
+webpage &lt;- read_html(url)
+records &lt;- webpage %&gt;% 
+  html_node(&quot;table&quot;) %&gt;%
+  html_table() # %&gt;%
+
+records</code></pre>
+<pre><code>##    L.p.                                    Nazwa Aktywa\n(mld PLN)
+## 1     1 Powszechna Kasa Oszczędności Bank Polski               286
+## 2     2                  Bank Polska Kasa Opieki               174
+## 3     3                        Bank Zachodni WBK               150
+## 4     4                                    mBank               134
+## 5     5                          ING Bank Śląski               117
+## 6     6                     Bank BGŻ BNP Paribas                72
+## 7     7                          Bank Millennium                69
+## 8     8                         Getin Noble Bank                67
+## 9     9                               Alior Bank                61
+## 10   10                   Raiffeisen Bank Polska                53
+## 11   11                Bank Handlowy w Warszawie                45
+## 12   12                     Deutsche Bank Polska             40[9]
+## 13   13                                Idea Bank                22
+## 14   14                  Bank Ochrony Środowiska                20
+## 15   15              Credit Agricole Bank Polska            20[12]
+## 16   16            Bank Polskiej Spółdzielczości                20
+## 17   17                  Santander Consumer Bank                17
+## 18   18                                 SGB-Bank                17
+## 19   19                                Euro Bank                14
+## 20   20                          DNB Bank Polska                10
+## 21   21                            Bank Pocztowy               6,9
+## 22   22                                Plus Bank             2[16]
+## 23   23             BPI Bank Polskich Inwestycji          0,48[17]
+## 24   24                                Nest Bank              b.d.
+##                               Inwestor dominujący
+## 1  Skarb Państwa RP poprzez Ministerstwo Finansów
+## 2                               PZU S.A. (Polska)
+## 3                     Banco Santander (Hiszpania)
+## 4                         Commerzbank AG (Niemcy)
+## 5                          ING Bank NV (Holandia)
+## 6                           BNP Paribas (Francja)
+## 7         Banco Comercial Portugues  (Portugalia)
+## 8                       Leszek Czarnecki (Polska)
+## 9                               PZU S.A. (Polska)
+## 10     Raiffeisen Bank International AG (Austria)
+## 11                   Citibank (Stany Zjednoczone)
+## 12                         Deutsche Bank (Niemcy)
+## 13                         Getin Holding (Polska)
+## 14                               NFOŚiGW (Polska)
+## 15                      Credit Agricole (Francja)
+## 16                    Banki spółdzielcze (Polska)
+## 17                Banco Santander (Hiszpania)[13]
+## 18                    Banki spółdzielcze (Polska)
+## 19                     Société Générale (Francja)
+## 20                            Bank DNB (Norwegia)
+## 21                         Poczta Polska (Polska)
+## 22                    Zygmunt Solorz-Żak (Polska)
+## 23                         Getin Holding (Polska)
+## 24                   AnaCap LPP (Wielka Brytania)
+##    Ilość akcji głównego\nudziałowca (%)
+## 1                                 29,43
+## 2                                    20
+## 3                                 69,34
+## 4                                 69,37
+## 5                                    75
+## 6                                 88,33
+## 7                                 50,10
+## 8                                 56,75
+## 9                                 32,19
+## 10                               100[6]
+## 11                                   75
+## 12                                  100
+## 13                                54,43
+## 14                                52,41
+## 15                                   75
+## 16                                   80
+## 17                                  100
+## 18                                  100
+## 19                                   99
+## 20                                  100
+## 21                                   75
+## 22                                 b.d.
+## 23                                  100
+## 24                                  100
+##    Wartość rynkowa głównego\nudziałowca (stan na 2016) Rok powstania
+## 1                                                    -          1919
+## 2                                                   27          1929
+## 3                                                  302       1988[5]
+## 4                                                   38          1986
+## 5                                                  216          1988
+## 6                                                  315          1919
+## 7                                                    3          1989
+## 8                                                    -          2004
+## 9                                                   27          2008
+## 10                                                  22          1991
+## 11                                                 696          1945
+## 12                                                 100          1995
+## 13                                                   1          1991
+## 14                                                   -          1991
+## 15                                                 140          1991
+## 16                                                b.d.          2002
+## 17                                                 302          2002
+## 18                                                b.d.          b.d.
+## 19                                                 158          2003
+## 20                                                b.d.          2003
+## 21                                                b.d.          1990
+## 22                                                   -          1991
+## 23                                                   1          b.d.
+## 24                                                b.d.          1995
+##    Zatrudnienie Wartość rynkowa (mld PLN) ROE (%) ROA (%) L.oddziałów
+## 1         25900                      35,2       9       1        1238
+## 2         17757                        33      10     1,3         928
+## 3         14722                      31,4      11     1,5         658
+## 4          8401                      14,2      10     0,9          77
+## 5          8025                        21      12     1,1         384
+## 6          8238                       4,9       1     0,1         488
+## 7          5844                       6,3      11       1         368
+## 8          5221                       1,2    (-1)  (-0,1)         260
+## 9         10245                         7      13     1,2         324
+## 10         4948                   b.d.[7]       3     0,3         228
+## 11         3640                        10       9     1,3          28
+## 12     2215[10]                    b.d[7]     b.d    b.d.         113
+## 13         1884                       1,8      18       2          75
+## 14         1535                      0,58    b.d.    b.d.          90
+## 15         5227                      b.d.    b.d.    b.d.         413
+## 16         b.d.                      b.d.       5    0,52        b.d.
+## 17         2510                      b.d.      17     2,7         163
+## 18          899                      b.d.       5    0,19        b.d.
+## 19         2996                      b.d.      10       1         270
+## 20          350                      b.d.    b.d.    b.d.        b.d.
+## 21     1461[15]                      b.d.    b.d.    b.d.         216
+## 22          883                      b.d.    b.d.    b.d.          95
+## 23         b.d.                      b.d.    b.d.    b.d.        b.d.
+## 24         b.d.                      b.d.    b.d.    b.d.        b.d.
+##    Zysk netto (mln PLN)
+## 1                  2875
+## 2                  2279
+## 3                  2167
+## 4                  1219
+## 5                  1253
+## 6                    77
+## 7                   701
+## 8                 (-42)
+## 9                   618
+## 10               162[8]
+## 11                  602
+## 12                   92
+## 13              441[11]
+## 14                (-60)
+## 15                  125
+## 16                   22
+## 17                  451
+## 18               29[14]
+## 19                  142
+## 20                   58
+## 21                  339
+## 22                  0,5
+## 23                    2
+## 24                 b.d.</code></pre>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>
 <p>You can also embed plots, for example:</p>

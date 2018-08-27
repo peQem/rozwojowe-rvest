@@ -7,7 +7,7 @@ editor_options:
   chunk_output_type: inline
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -122,7 +122,17 @@ head(wynik_df)
 knitr::kable(wynik_df, format = "markdown")
 ```
 
+W tym przypadku da siê proœciej
 
+```{r include = FALSE}
+url <- "https://pl.wikipedia.org/wiki/Lista_bank%C3%B3w_dzia%C5%82aj%C4%85cych_w_Polsce"
+webpage <- read_html(url)
+records <- webpage %>% 
+  html_node("table") %>%
+  html_table() # %>%
+
+records
+```
 
 ## Including Plots
 
